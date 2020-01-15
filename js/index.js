@@ -5,6 +5,12 @@ var randOne = (Math.floor(Math.random()*255))
 var randTwo = (Math.floor(Math.random()*255))
 var randThree = (Math.floor(Math.random()*255))
 
+const nav = document.querySelector('.text-content')
+nav.addEventListener('click', function(e){
+    nav.style.backgroundColor = 'orange'
+    e.stopPropagation();
+})
+
 //Makes title color random every click
 pageTitle.addEventListener('click', function(){
     pageTitle.style.color = `rgb(${randOne}, ${randTwo}, ${randThree})`
@@ -31,6 +37,12 @@ menuItems.forEach(el =>{
         el.style.color = 'yellow'
         el.style.transition = '0.8s'
         el.style.textDecoration = 'underline'
+    })
+})
+
+menuItems.forEach(el => {
+    el.addEventListener('click', function(e){
+        e.preventDefault();
     })
 })
 
@@ -62,18 +74,28 @@ function scrollAppear(){
 }
 window.addEventListener('scroll', scrollAppear)
 
-
 //H2 Hghlights titles on hover
 const newSub = document.querySelectorAll('h2, h4')
 newSub.forEach(el => {
     el.addEventListener('mouseenter', function(){
         el.style.backgroundColor = 'yellow'
         el.style.width = '85%'
+        el.stopPropagation();
     })
 })
 
+newSub.forEach(el => {
+    el.addEventListener('mousedown', function(){
+        el.style.backgroundColor = 'transparent'
+    })
+})
 
-
-const colorScroll = document.querySelectorAll('.main-navigation, .intro, .content-sectiion, .content-destination')
-
-
+//Allows scrolling on the title to resize
+let scale = 1;
+function scrollToZoom(e){
+    e.preventDefault();
+    scale += e.deltaY * -0.001;
+    scale = Math.min(Math.max(.125, scale), 4);
+    pageTitle.style.transform = `scale(${scale})`;
+}
+pageTitle.addEventListener('wheel', scrollToZoom)
