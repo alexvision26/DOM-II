@@ -10,12 +10,27 @@ pageTitle.addEventListener('click', function(){
     pageTitle.style.color = `rgb(${randOne}, ${randTwo}, ${randThree})`
 })
 
-const menuItems = document.querySelectorAll('.nav-link')
 
+//Changes the color of menu items
+const menuItems = document.querySelectorAll('.nav-link')
 menuItems.forEach(el => {
-    el.addEventListener('mousemove', () =>{
+    el.addEventListener('mousemove', () =>{ //When mouse enters, generate random color
         el.style.color = `rgb(${randOne}, ${randTwo}, ${randThree})`
         el.style.transition = '0.3s'
+    })
+})
+menuItems.forEach(el => {
+    el.addEventListener('mouseout', () =>{ //When mouse leaves, return to default
+        el.style.color = 'black'
+        el.style.textDecoration = 'none'
+    })
+})
+
+menuItems.forEach(el =>{
+    el.addEventListener('mouseup', function(){
+        el.style.color = 'yellow'
+        el.style.transition = '0.8s'
+        el.style.textDecoration = 'underline'
     })
 })
 
@@ -45,20 +60,10 @@ function scrollAppear(){
         imgAppear.classList.add('img-appear')
     }
 }
-
 window.addEventListener('scroll', scrollAppear)
 
 
-//Changes the color of menu items
-menuItems.forEach(el => {
-    el.addEventListener('mouseout', () =>{
-        el.style.color = 'black'
-        el.style.textDecoration = 'none'
-    })
-})
-
-
-//H2 Hovers
+//H2 Hghlights titles on hover
 const newSub = document.querySelectorAll('h2, h4')
 newSub.forEach(el => {
     el.addEventListener('mouseenter', function(){
@@ -66,4 +71,9 @@ newSub.forEach(el => {
         el.style.width = '85%'
     })
 })
+
+
+
+const colorScroll = document.querySelectorAll('.main-navigation, .intro, .content-sectiion, .content-destination')
+
 
